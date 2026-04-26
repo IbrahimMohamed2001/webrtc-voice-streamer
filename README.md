@@ -78,7 +78,3 @@ You can listen to the latest stream via a standard MP3 player:
 - **Signaling**: WebRTC Offer/Answer over WebSocket.
 - **Media**: Opus/PCM via WebRTC, MP3 via `PyAV` (AudioStreamServer).
 - **Network**: Host networking required for robust P2P.
-
-## License
-
-MIT
