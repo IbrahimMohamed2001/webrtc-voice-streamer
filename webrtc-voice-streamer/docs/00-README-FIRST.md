@@ -22,25 +22,49 @@ Standard Home Assistant audio integrations have **high latency** (2-10 seconds) 
 
 ```
 webrtc_backend/
-├── webrtc_server_relay.py      # Main signaling server (WebRTC + WebSocket)
-├── audio_stream_server.py       # MP3 HTTP streaming server
-├── ssl-setup.sh                 # Autonomous SSL certificate management
-├── run.sh                       # Add-on entrypoint script
-├── frontend/                    # TypeScript/Lit Lovelace cards
-│   └── src/
-│       ├── voice-sending-card.ts
-│       ├── voice-receiving-card.ts
-│       └── webrtc-manager.ts
-├── config.yaml                  # Home Assistant Add-on manifest
-├── Dockerfile                   # Multi-stage build (Node + Python)
-└── .handover/                   # ← You are here - handover documentation
-    ├── 00-README-FIRST.md       # ← This file
-    ├── 01-SETUP-GUIDE.md        # Installation and configuration
-    ├── 02-ARCHITECTURE.md       # Deep dive into system design
-    ├── 03-DECISION-LOG.md       # Why things are the way they are
-    ├── 04-GOTCHAS.md            # Known issues and workarounds
-    ├── 05-BUILD-RELEASE.md      # Build & release procedures
-    └── ONBOARDING-CHECKLIST.md  # New developer checklist
+├── README.md                                      # Root repository README
+├── repository.yaml                                # HA Add-on repository configuration
+└── webrtc-voice-streamer                          # The actual Add-on directory
+    ├── audio_stream_server.py                     # MP3 HTTP streaming server
+    ├── build.yaml                                 # Build configuration for Home Assistant
+    ├── config.yaml                                # Home Assistant Add-on manifest
+    ├── Dockerfile                                 # Multi-stage build (Node + Python)
+    ├── docs                                       # Handover and developer documentation
+    │   ├── 00-README-FIRST.md                     # ← This file (Start here)
+    │   ├── 01-SETUP-GUIDE.md                      # Installation and configuration guide
+    │   ├── 02-ARCHITECTURE.md                     # Deep dive into system design
+    │   ├── 03-DECISION-LOG.md                     # Why things are the way they are
+    │   ├── 04-GOTCHAS.md                          # Known issues and workarounds
+    │   ├── 05-BUILD-RELEASE.md                    # Build & release procedures
+    │   ├── architecture-map.md                    # Visual architecture map
+    │   ├── HANDOVER-SUMMARY.md                    # Project status handover summary
+    │   ├── ONBOARDING-CHECKLIST.md                # New developer checklist
+    │   └── TESTING.md                             # Testing strategies and scripts
+    ├── frontend                                   # TypeScript/Lit Lovelace cards
+    │   ├── package.json                           # NPM dependencies
+    │   ├── package-lock.json                      # NPM lockfile
+    │   ├── rollup.config.js                       # Rollup bundler configuration
+    │   ├── src                                    # Source code for Lovelace cards
+    │   │   ├── styles.ts                          # Shared CSS styles
+    │   │   ├── types.ts                           # TypeScript interfaces and types
+    │   │   ├── voice-receiving-card.ts            # Card to receive audio from HA
+    │   │   ├── voice-receiving-editor.ts          # Editor for receiving card
+    │   │   ├── voice-sending-card.ts              # Card to send audio to HA
+    │   │   ├── voice-sending-editor.ts            # Editor for sending card
+    │   │   ├── voice-streaming-card-dashboard.ts  # Dashboard wrapper
+    │   │   └── webrtc-manager.ts                  # Core WebRTC logic
+    │   ├── tsconfig.json                          # TypeScript build configuration
+    │   └── tsconfig.typecheck.json                # TypeScript strict type checking
+    ├── icon.png                                   # Add-on icon
+    ├── license_middleware.py                      # License validation middleware
+    ├── logo.png                                   # Add-on logo
+    ├── register_frontend.py                       # Registers Lovelace cards with HA
+    ├── requirements.txt                           # Python dependencies
+    ├── run.sh                                     # Add-on entrypoint script
+    ├── ssl-setup.sh                               # Autonomous SSL certificate management
+    ├── tests                                      # Test scripts
+    │   └── verify_autossl.sh                      # SSL verification script
+    └── webrtc_server_relay.py                     # Main signaling server (WebRTC + WebSocket)
 ```
 
 ## 🚀 Quick Start (For Developers)
